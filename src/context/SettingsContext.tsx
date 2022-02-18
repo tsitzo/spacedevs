@@ -16,7 +16,7 @@ type SettingsContextState = {
 const contextDefaultValue: SettingsContextState = {
   theme: "automatic",
   launchType: "upcoming",
-  browser: "inApp",
+  browser: "in app",
   newsSite: "",
   selectTheme: () => {},
   selectLaunchType: () => {},
@@ -55,7 +55,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
   const saveTheme = async (value: Themes) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@ORBITALV1/theme", jsonValue);
+      await AsyncStorage.setItem("@ORBITALSettings/theme", jsonValue);
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +63,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
 
   const loadTheme = async () => {
     try {
-      const value = await AsyncStorage.getItem("@ORBITALV1/theme");
+      const value = await AsyncStorage.getItem("@ORBITALSettings/theme");
       if (value !== null) {
         setTheme(JSON.parse(value));
       }
@@ -75,7 +75,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
   const saveLaunchType = async (value: LaunchType) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@ORBITALV1/launchType", jsonValue);
+      await AsyncStorage.setItem("@ORBITALSettings/launchType", jsonValue);
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +83,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
 
   const loadLaunchType = async () => {
     try {
-      const value = await AsyncStorage.getItem("@ORBITALV1/launchType");
+      const value = await AsyncStorage.getItem("@ORBITALSettings/launchType");
       if (value !== null) {
         setLaunchType(JSON.parse(value));
       }
@@ -95,7 +95,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
   const saveBrowser = async (value: Browsers) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@ORBITALV1/browser", jsonValue);
+      await AsyncStorage.setItem("@ORBITALSettings/browser", jsonValue);
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +103,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
 
   const loadBrowser = async () => {
     try {
-      const value = await AsyncStorage.getItem("@ORBITALV1/browser");
+      const value = await AsyncStorage.getItem("@ORBITALSettings/browser");
       if (value !== null) {
         setBrowser(JSON.parse(value));
       }
@@ -115,7 +115,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
   const saveNewsSite = async (value: string) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@ORBITALV1/newsSite", jsonValue);
+      await AsyncStorage.setItem("@ORBITALSettings/newsSite", jsonValue);
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +123,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
 
   const loadNewsSite = async () => {
     try {
-      const value = await AsyncStorage.getItem("@ORBITALV1/newsSite");
+      const value = await AsyncStorage.getItem("@ORBITALSettings/newsSite");
       if (value !== null) {
         setNewsSite(JSON.parse(value));
       }
