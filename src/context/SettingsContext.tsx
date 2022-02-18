@@ -1,23 +1,27 @@
 import React, { FC, createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Browsers, LaunchType, Themes } from "../types/settings";
+import { Browsers, LaunchType, Themes, NewsSite } from "../types/settings";
 
 type SettingsContextState = {
   theme: Themes;
   launchType: LaunchType;
   browser: Browsers;
+  newsSite: NewsSite;
   selectTheme: (theme: Themes) => void;
   selectLaunchType: (launchType: LaunchType) => void;
   selectBrowser: (browser: Browsers) => void;
+  selectNewsSite: (newsSite: NewsSite) => void;
 };
 
 const contextDefaultValue: SettingsContextState = {
   theme: "automatic",
   launchType: "upcoming",
   browser: "inApp",
+  newsSite: "",
   selectTheme: () => {},
   selectLaunchType: () => {},
   selectBrowser: () => {},
+  selectNewsSite: () => {},
 };
 export const SettingsContext =
   createContext<SettingsContextState>(contextDefaultValue);
@@ -28,6 +32,9 @@ export const SettingsContextProvider: FC = ({ children }) => {
     contextDefaultValue.launchType
   );
 
+  const [newsSite, setNewsSite] = useState<NewsSite>(
+    contextDefaultValue.newsSite
+  );
   const [browser, setBrowser] = useState<Browsers>(contextDefaultValue.browser);
 
   const selectTheme = (theme: Themes) => {
@@ -39,6 +46,10 @@ export const SettingsContextProvider: FC = ({ children }) => {
 
   const selectBrowser = (browser: Browsers) => {
     setBrowser(browser);
+  };
+
+  const selectNewsSite = (newsSite: NewsSite) => {
+    setNewsSite(newsSite);
   };
 
   const saveTheme = async (value: Themes) => {
@@ -64,7 +75,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
   const saveLaunchType = async (value: LaunchType) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@ORBITAL/launchType", jsonValue);
+      await AsyncStorage.setItem("@ORBITALV1/launchType", jsonValue);
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +83,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
 
   const loadLaunchType = async () => {
     try {
-      const value = await AsyncStorage.getItem("@ORBITAL/launchType");
+      const value = await AsyncStorage.getItem("@ORBITALV1/launchType");
       if (value !== null) {
         setLaunchType(JSON.parse(value));
       }
@@ -84,7 +95,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
   const saveBrowser = async (value: Browsers) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@ORBITAL/browser", jsonValue);
+      await AsyncStorage.setItem("@ORBITALV1/browser", jsonValue);
     } catch (error) {
       console.log(error);
     }
@@ -92,9 +103,29 @@ export const SettingsContextProvider: FC = ({ children }) => {
 
   const loadBrowser = async () => {
     try {
-      const value = await AsyncStorage.getItem("@ORBITAL/browser");
+      const value = await AsyncStorage.getItem("@ORBITALV1/browser");
       if (value !== null) {
         setBrowser(JSON.parse(value));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const saveNewsSite = async (value: string) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("@ORBITALV1/newsSite", jsonValue);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loadNewsSite = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@ORBITALV1/newsSite");
+      if (value !== null) {
+        setNewsSite(JSON.parse(value));
       }
     } catch (error) {
       console.log(error);
@@ -114,6 +145,10 @@ export const SettingsContextProvider: FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    loadNewsSite();
+  }, []);
+
+  useEffect(() => {
     saveTheme(theme);
   }, [theme]);
 
@@ -125,15 +160,21 @@ export const SettingsContextProvider: FC = ({ children }) => {
     saveBrowser(browser);
   }, [browser]);
 
+  useEffect(() => {
+    saveNewsSite(newsSite);
+  }, [newsSite]);
+
   return (
     <SettingsContext.Provider
       value={{
         theme,
         launchType,
         browser,
+        newsSite,
         selectTheme,
         selectLaunchType,
         selectBrowser,
+        selectNewsSite,
       }}
     >
       {children}
