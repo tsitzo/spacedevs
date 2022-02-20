@@ -103,13 +103,17 @@ export const AppStack = () => {
         component={NewsFilterScreen}
         options={{
           headerTitle: "Select News Site",
+          presentation: "formSheet",
+          headerStyle: { backgroundColor: colors.card },
         }}
       />
       <Stack.Screen
         name="LaunchesFilterScreen"
         component={LaunchesFilterScreen}
         options={{
-          headerTitle: "Select Launches",
+          headerTitle: "Select Launches Type",
+          presentation: "formSheet",
+          headerStyle: { backgroundColor: colors.card },
         }}
       />
     </Stack.Navigator>

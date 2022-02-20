@@ -9,7 +9,6 @@ import {
 import moment from "moment";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { LaunchDetailed } from "../types/apiResponse";
 import { useFetch } from "../hooks/useFetch";
