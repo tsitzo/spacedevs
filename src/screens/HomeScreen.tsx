@@ -2,18 +2,21 @@ import React from "react";
 import {
   ActivityIndicator,
   ImageBackground,
-  StatusBar,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from "react-native";
-
+import moment from "moment";
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 
 import { LaunchDetailed } from "../types/apiResponse";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 
 import Typography from "../components/text/Typography";
 import Spacer from "../components/layout/Spacer";
+import HomeCountdown from "../components/ui/HomeCountdown";
+import SafeArea from "../components/layout/SafeArea";
 
 interface LaunchListResponse {
   count: number;
@@ -23,22 +26,29 @@ interface LaunchListResponse {
 }
 
 const HomeScreen = () => {
-  const URI = `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=1&mode=detailed`;
+  const URI = `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=5&mode=detailed`;
   const { colors } = useTheme();
 
-  const { data, error } = useFetch<LaunchListResponse>(URI);
+  const { response, loading, error, fetchData } =
+    useFetch<LaunchListResponse>(URI);
 
-  const launch = data?.results[0];
+  const launch = response?.results.filter(
+    (launch) => moment(launch.net).valueOf() / 1000 > moment().unix()
+  )[0];
 
   return (
     <View style={styles.page}>
-      {!data && (
+      {loading && (
         <View style={styles.centeredPage}>
           <ActivityIndicator size={60} color={colors.primary} />
         </View>
       )}
       {error && (
         <View style={styles.centeredPage}>
+          <TouchableOpacity onPress={() => fetchData()}>
+            <Ionicons name="refresh" color={colors.primary} size={40} />
+          </TouchableOpacity>
+          <Spacer y={10} />
           <Typography>There was an error fetching data.</Typography>
         </View>
       )}
@@ -53,22 +63,25 @@ const HomeScreen = () => {
           imageStyle={styles.imageBackground}
           resizeMode="cover"
         >
-          <View style={styles.imageBackgroundContent}>
-            <Typography variant="bold" size={30} style={styles.launchNameText}>
-              {launch.mission?.name.split("(")[0]}
-            </Typography>
-            <Typography variant="bold" size={30} style={styles.launchNameText}>
-              ({launch.mission?.name.split("(")[1]}
-            </Typography>
-            <Spacer y={10} />
-            <Typography style={styles.launchNameSubtext}>
-              {launch.launch_service_provider.name}
-            </Typography>
-            <Spacer y={10} />
-            <View style={{ padding: 20, backgroundColor: colors.card }}>
-              <Typography>COUNTDOWN</Typography>
-            </View>
-          </View>
+          <SafeArea>
+            <TouchableOpacity style={styles.imageBackgroundContent}>
+              <Typography
+                variant="bold"
+                size={30}
+                style={styles.launchNameText}
+              >
+                {launch.mission?.name.split("(")[0]}
+              </Typography>
+
+              <Typography style={styles.launchNameSubtext}>
+                {launch.launch_service_provider.name}
+              </Typography>
+              <Spacer y={20} />
+              <View style={styles.countdownWrapper}>
+                <HomeCountdown date={launch.net} />
+              </View>
+            </TouchableOpacity>
+          </SafeArea>
         </ImageBackground>
       )}
     </View>
@@ -85,12 +98,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageBackgroundContainer: { flex: 1, backgroundColor: "black" },
-  imageBackground: { opacity: 0.4 },
+  imageBackground: { opacity: 0.3 },
   imageBackgroundContent: {
     flex: 1,
     padding: 15,
     justifyContent: "center",
   },
+  touchable: { flex: 1 },
   launchNameText: { color: "#fff" },
   launchNameSubtext: { color: "#989899" },
+  countdownWrapper: { flexDirection: "row", justifyContent: "flex-start" },
 });
