@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   ActivityIndicator,
   ImageBackground,
@@ -9,9 +9,12 @@ import {
 import moment from "moment";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 import { LaunchDetailed } from "../types/apiResponse";
 import { useFetch } from "../hooks/useFetch";
+import { AppStackParams } from "../types/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import Typography from "../components/text/Typography";
 import Spacer from "../components/layout/Spacer";
@@ -25,8 +28,12 @@ interface LaunchListResponse {
   results: LaunchDetailed[];
 }
 
-const HomeScreen = () => {
-  const URI = `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=5&mode=detailed`;
+interface IHomeScreenProps {
+  navigation: NativeStackNavigationProp<AppStackParams, "AppTabs">;
+}
+
+const HomeScreen: FC<IHomeScreenProps> = ({ navigation }) => {
+  const URI = `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=3&mode=detailed`;
   const { colors } = useTheme();
 
   const { response, loading, error, fetchData } =
@@ -52,7 +59,7 @@ const HomeScreen = () => {
           <Typography>There was an error fetching data.</Typography>
         </View>
       )}
-      {launch && (
+      {!loading && !error && launch && (
         <ImageBackground
           source={{
             uri: launch?.image
@@ -64,10 +71,18 @@ const HomeScreen = () => {
           resizeMode="cover"
         >
           <SafeArea>
-            <TouchableOpacity style={styles.imageBackgroundContent}>
+            <TouchableOpacity
+              style={styles.imageBackgroundContent}
+              onPress={() =>
+                navigation.push("LaunchDetailsScreen", {
+                  id: launch.id,
+                  name: launch.mission?.name.split("(")[0]!,
+                })
+              }
+            >
               <Typography
                 variant="bold"
-                size={30}
+                size={32}
                 style={styles.launchNameText}
               >
                 {launch.mission?.name.split("(")[0]}
@@ -98,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageBackgroundContainer: { flex: 1, backgroundColor: "black" },
-  imageBackground: { opacity: 0.3 },
+  imageBackground: { opacity: 0.4 },
   imageBackgroundContent: {
     flex: 1,
     padding: 15,

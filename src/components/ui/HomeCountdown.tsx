@@ -53,7 +53,9 @@ const HomeCountdown: FC<IHomeCountdownProps> = ({ date }) => {
           </Typography>
         </View>
         <Spacer y={5} />
-        <Typography variant="bold">dys</Typography>
+        <Typography variant="bold" style={styles.countdownNumberLabel}>
+          dys
+        </Typography>
       </View>
       <Spacer x={10} />
 
@@ -64,7 +66,9 @@ const HomeCountdown: FC<IHomeCountdownProps> = ({ date }) => {
           </Typography>
         </View>
         <Spacer y={5} />
-        <Typography variant="bold">hrs</Typography>
+        <Typography variant="bold" style={styles.countdownNumberLabel}>
+          hrs
+        </Typography>
       </View>
       <Spacer x={10} />
 
@@ -79,7 +83,9 @@ const HomeCountdown: FC<IHomeCountdownProps> = ({ date }) => {
           </Typography>
         </View>
         <Spacer y={5} />
-        <Typography variant="bold">min</Typography>
+        <Typography variant="bold" style={styles.countdownNumberLabel}>
+          min
+        </Typography>
       </View>
       <Spacer x={10} />
       <View style={styles.countdownBlockWraooer}>
@@ -93,7 +99,9 @@ const HomeCountdown: FC<IHomeCountdownProps> = ({ date }) => {
           </Typography>
         </View>
         <Spacer y={5} />
-        <Typography variant="bold">sec</Typography>
+        <Typography variant="bold" style={styles.countdownNumberLabel}>
+          sec
+        </Typography>
       </View>
     </View>
   );
@@ -114,4 +122,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   countdownNumberText: { color: "black" },
+  countdownNumberLabel: { color: "#989899" },
 });

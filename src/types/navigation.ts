@@ -8,7 +8,7 @@ export type AppTabsParams = {
 
 export type AppStackParams = {
   AppTabs: undefined;
-  LaunchDetailsScreen: undefined;
+  LaunchDetailsScreen: { id: string; name: string };
   AgencyDetailsScreen: undefined;
   AgencyLaunchesScreen: undefined;
   RocketDetailsScreen: undefined;
