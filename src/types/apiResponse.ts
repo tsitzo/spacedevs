@@ -13,6 +13,22 @@ export type NewsArticle = {
   };
 };
 
+export type SpaceEvent = {
+  id: number;
+  url: string;
+  slug: string;
+  name: string;
+  updates: any[];
+  type: { id: number; name: string };
+  description: string;
+  webcast_live: boolean;
+  location: null | string;
+  news_url: null | string;
+  video_url: null | string;
+  feature_image: string;
+  date: Date;
+};
+
 export interface Launch {
   id: string;
   url: string;
