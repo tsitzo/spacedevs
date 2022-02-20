@@ -18,6 +18,7 @@ import { NewsArticle } from "../types/apiResponse";
 import Typography from "../components/text/Typography";
 import SafeArea from "../components/layout/SafeArea";
 import Spacer from "../components/layout/Spacer";
+import NewsTile from "../components/ui/NewsTile";
 
 interface INewsScreenProps {
   navigation: NativeStackNavigationProp<AppStackParams, "AppTabs">;
@@ -75,7 +76,7 @@ const NewsScreen: FC<INewsScreenProps> = ({ navigation }) => {
                 },
               ]}
             >
-              <Typography>{item.title}</Typography>
+              <NewsTile article={item} />
             </View>
           )}
         />
