@@ -13,6 +13,7 @@ import { NewsArticle } from "../../../types/apiResponse";
 import { SettingsContext } from "../../../context/SettingsContext";
 import Spacer from "../../layout/Spacer";
 import Typography from "../../text/Typography";
+import NewsTileBookmarkButton from "./NewsTileBookmarkButton";
 import openLink from "../../../../utils/openLink";
 
 interface INewsTileProps {
@@ -57,6 +58,7 @@ const NewsTile: FC<INewsTileProps> = ({ article }) => {
         <View style={{ flex: 4.7 / 5 }}>
           <Typography variant="bold">{article.title}</Typography>
         </View>
+        <NewsTileBookmarkButton article={article} />
       </View>
 
       <Spacer y={10} />
