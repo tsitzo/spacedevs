@@ -55,7 +55,7 @@ const NewsTile: FC<INewsTileProps> = ({ article }) => {
       <Spacer y={20} />
 
       <View style={styles.row}>
-        <View style={{ flex: 4.7 / 5 }}>
+        <View style={styles.subrow}>
           <Typography variant="bold">{article.title}</Typography>
         </View>
         <NewsTileBookmarkButton article={article} />
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  subrow: { flex: 4.7 / 5 },
   placeHolderImage: {
     justifyContent: "center",
     alignSelf: "center",

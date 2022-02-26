@@ -3,7 +3,6 @@ import {
   ActivityIndicator,
   FlatList,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -17,6 +16,7 @@ import { useFetch } from "../hooks/useFetch";
 import SafeArea from "../components/layout/SafeArea";
 import Spacer from "../components/layout/Spacer";
 import Typography from "../components/text/Typography";
+import EventTile from "../components/ui/EventTile";
 
 interface SpaceEventResponse {
   count: number;
@@ -35,8 +35,8 @@ const EventsScreen: FC<IEventsScreenProps> = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.push("SavedEventsScreen")}>
-          <Ionicons name="bookmark" color={colors.primary} size={24} />
+        <TouchableOpacity onPress={() => fetchData()}>
+          <Ionicons name="sync" color={colors.primary} size={24} />
         </TouchableOpacity>
       ),
     });
@@ -73,7 +73,9 @@ const EventsScreen: FC<IEventsScreenProps> = ({ navigation }) => {
                     index + 1 < response.results.length ? 0.17 : 0,
                 },
               ]}
-            ></View>
+            >
+              <EventTile event={item} />
+            </View>
           )}
         />
       )}
