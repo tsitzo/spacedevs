@@ -14,7 +14,6 @@ import {
   LaunchesFilterScreen,
   NewsFilterScreen,
   SavedNewsScreen,
-  SavedEventsScreen,
   AgencyDetailsScreen,
   AgencyLaunchesScreen,
   RocketDetailsScreen,
@@ -87,11 +86,6 @@ export const AppStack = () => {
         name="SavedNewsScreen"
         component={SavedNewsScreen}
         options={{ headerTitle: "Saved News" }}
-      />
-      <Stack.Screen
-        name="SavedEventsScreen"
-        component={SavedEventsScreen}
-        options={{ headerTitle: "Saved Events" }}
       />
       <Stack.Screen
         name="SavedLaunchesScreen"

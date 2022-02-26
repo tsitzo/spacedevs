@@ -17,7 +17,6 @@ export type AppStackParams = {
   SettingsLaunchesScreen: undefined;
   SettingsBrowserScreen: undefined;
   SettingsNewsScreen: undefined;
-  SavedEventsScreen: undefined;
   SavedLaunchesScreen: undefined;
   SavedNewsScreen: undefined;
   NewsFilterScreen: undefined;
