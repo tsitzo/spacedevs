@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect } from "react";
+import React, { FC, useContext, useLayoutEffect } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -17,6 +17,7 @@ import SafeArea from "../components/layout/SafeArea";
 import Spacer from "../components/layout/Spacer";
 import Typography from "../components/text/Typography";
 import EventTile from "../components/ui/EventTile";
+import { SettingsContext } from "../context/SettingsContext";
 
 interface SpaceEventResponse {
   count: number;
@@ -28,7 +29,8 @@ interface IEventsScreenProps {
 
 const EventsScreen: FC<IEventsScreenProps> = ({ navigation }) => {
   const { colors } = useTheme();
-  const URI = `https://lldev.thespacedevs.com/2.2.0/event/upcoming/?limit=30`;
+  const { eventType } = useContext(SettingsContext);
+  const URI = `https://lldev.thespacedevs.com/2.2.0/event/${eventType}/?limit=30`;
   const { response, error, loading, fetchData } =
     useFetch<SpaceEventResponse>(URI);
 

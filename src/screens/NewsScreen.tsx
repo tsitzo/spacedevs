@@ -33,9 +33,15 @@ const NewsScreen: FC<INewsScreenProps> = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.push("SavedNewsScreen")}>
-          <Ionicons name="bookmark" color={colors.primary} size={24} />
-        </TouchableOpacity>
+        <View style={styles.topRowIconContainer}>
+          <TouchableOpacity onPress={() => fetchData()}>
+            <Ionicons name="sync" color={colors.primary} size={24} />
+          </TouchableOpacity>
+          <Spacer x={10} />
+          <TouchableOpacity onPress={() => navigation.push("SavedNewsScreen")}>
+            <Ionicons name="bookmark" color={colors.primary} size={24} />
+          </TouchableOpacity>
+        </View>
       ),
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.push("NewsFilterScreen")}>
@@ -95,4 +101,5 @@ const styles = StyleSheet.create({
   },
   listItemWrapper: { paddingVertical: 20 },
   flatListContent: { paddingHorizontal: 15 },
+  topRowIconContainer: { flexDirection: "row" },
 });

@@ -57,7 +57,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
   const selectLaunchType = (launchType: LaunchType) =>
     setLaunchType(launchType);
 
-  const selectEventType = (eventType: EventType) => setLaunchType(eventType);
+  const selectEventType = (eventType: EventType) => setEventType(eventType);
 
   const selectBrowser = (browser: Browsers) => {
     setBrowser(browser);
