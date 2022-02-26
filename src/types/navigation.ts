@@ -21,4 +21,5 @@ export type AppStackParams = {
   SavedNewsScreen: undefined;
   NewsFilterScreen: undefined;
   LaunchesFilterScreen: undefined;
+  EventsFilterScreen: undefined;
 };

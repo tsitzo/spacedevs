@@ -17,6 +17,7 @@ import SettingsThemeScreen from "./SettingsThemeScreen";
 import SettingsNewsScreen from "./SettingsNewsScreen";
 import SettingsBrowserScreen from "./SettingsBrowserScreen";
 import SettingsLaunchesScreen from "./SettingsLaunchesScreen";
+import EventsFilterScreen from "./EventsFilterScreen";
 
 export {
   AgencyDetailsScreen,
@@ -37,4 +38,5 @@ export {
   SettingsNewsScreen,
   SettingsThemeScreen,
   SettingsBrowserScreen,
+  EventsFilterScreen,
 };

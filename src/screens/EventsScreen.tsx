@@ -34,6 +34,11 @@ const EventsScreen: FC<IEventsScreenProps> = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => navigation.push("EventsFilterScreen")}>
+          <Ionicons name="menu" color={colors.primary} size={26} />
+        </TouchableOpacity>
+      ),
       headerRight: () => (
         <TouchableOpacity onPress={() => fetchData()}>
           <Ionicons name="sync" color={colors.primary} size={24} />

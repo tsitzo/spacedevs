@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const LaunchesScreen = () => {
+const EventsFilterScreen = () => {
   return (
     <View>
-      <Text>LaunchesScreen</Text>
+      <Text>EventsFilterScreen</Text>
     </View>
   );
 };
 
-export default LaunchesScreen;
+export default EventsFilterScreen;
 
 const styles = StyleSheet.create({});

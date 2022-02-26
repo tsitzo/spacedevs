@@ -18,6 +18,7 @@ import {
   AgencyLaunchesScreen,
   RocketDetailsScreen,
   RocketLaunchesScreen,
+  EventsFilterScreen,
 } from "../screens";
 
 const Stack = createNativeStackNavigator<AppStackParams>();
@@ -97,6 +98,15 @@ export const AppStack = () => {
         component={NewsFilterScreen}
         options={{
           headerTitle: "Select News Site",
+          presentation: "formSheet",
+          headerStyle: { backgroundColor: colors.card },
+        }}
+      />
+      <Stack.Screen
+        name="EventsFilterScreen"
+        component={EventsFilterScreen}
+        options={{
+          headerTitle: "Select Event Type",
           presentation: "formSheet",
           headerStyle: { backgroundColor: colors.card },
         }}
