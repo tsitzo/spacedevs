@@ -75,7 +75,10 @@ const HomeScreen: FC<IHomeScreenProps> = ({ navigation }) => {
               onPress={() =>
                 navigation.push("LaunchDetailsScreen", {
                   id: launch.id,
-                  name: launch.mission?.name.split("(")[0]!,
+                  name:
+                    launch.mission?.name === ""
+                      ? "Unknown"
+                      : launch.mission?.name.split("(")[0]!,
                 })
               }
             >
@@ -84,7 +87,9 @@ const HomeScreen: FC<IHomeScreenProps> = ({ navigation }) => {
                 size={32}
                 style={styles.launchNameText}
               >
-                {launch.mission?.name.split("(")[0]}
+                {launch.mission?.name === ""
+                  ? "Unknown"
+                  : launch.mission?.name.split("(")[0]!}
               </Typography>
 
               <Typography style={styles.launchNameSubtext}>

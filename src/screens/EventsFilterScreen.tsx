@@ -60,7 +60,10 @@ const EventsFilterScreen: FC<IEventsFilterScreenProps> = ({ navigation }) => {
                 }}
                 style={styles.selectionTileContent}
               >
-                <Typography variant={eventType === item ? "bold" : "regular"}>
+                <Typography
+                  variant={eventType === item ? "bold" : "regular"}
+                  style={styles.capitalize}
+                >
                   {item}
                 </Typography>
                 {eventType === item && (
@@ -89,4 +92,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  capitalize: { textTransform: "capitalize" },
 });
