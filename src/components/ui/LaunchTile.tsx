@@ -2,7 +2,7 @@ import { StyleSheet, Image, View } from "react-native";
 import React, { FC } from "react";
 import { LaunchDetailed } from "../../types/apiResponse";
 import Typography from "../text/Typography";
-import moment from "moment-timezone";
+import moment from "moment";
 import Spacer from "../layout/Spacer";
 import { useTheme } from "@react-navigation/native";
 
@@ -25,7 +25,7 @@ const LaunchTile: FC<ILaunchTileProps> = ({ launch }) => {
         <Spacer y={5} />
         <View style={styles.chipsRow}>
           {launch.mission?.orbit && (
-            <View style={[styles.chip, { backgroundColor: colors.card }]}>
+            <View style={[styles.chip, { backgroundColor: colors.surface }]}>
               <View
                 style={[styles.circle, { backgroundColor: colors.primary }]}
               />
@@ -35,7 +35,7 @@ const LaunchTile: FC<ILaunchTileProps> = ({ launch }) => {
             </View>
           )}
 
-          <View style={[styles.chip, { backgroundColor: colors.card }]}>
+          <View style={[styles.chip, { backgroundColor: colors.surface }]}>
             <View
               style={[styles.circle, { backgroundColor: colors.primary }]}
             />
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   chipsRow: { flexDirection: "row" },
   chip: {
-    padding: 3,
+    padding: 3.5,
     marginRight: 10,
     borderRadius: 3,
     flexDirection: "row",

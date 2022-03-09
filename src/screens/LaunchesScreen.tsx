@@ -72,7 +72,9 @@ const LaunchesScreen: FC<ILaunchesScreenProps> = ({ navigation }) => {
             <Ionicons name="sync" color={colors.primary} size={24} />
           </TouchableOpacity>
           <Spacer x={10} />
-          <TouchableOpacity onPress={() => navigation.push("SavedNewsScreen")}>
+          <TouchableOpacity
+            onPress={() => navigation.push("SavedLaunchesScreen")}
+          >
             <Ionicons name="bookmark" color={colors.primary} size={24} />
           </TouchableOpacity>
         </View>
