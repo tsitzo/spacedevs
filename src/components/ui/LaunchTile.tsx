@@ -1,10 +1,11 @@
 import { StyleSheet, Image, View } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { LaunchDetailed } from "../../types/apiResponse";
 import Typography from "../text/Typography";
-import moment from "moment";
+import moment from "moment-timezone";
 import Spacer from "../layout/Spacer";
 import { useTheme } from "@react-navigation/native";
+import { SettingsContext } from "../../context/SettingsContext";
 
 interface ILaunchTileProps {
   launch: LaunchDetailed;
@@ -12,6 +13,7 @@ interface ILaunchTileProps {
 
 const LaunchTile: FC<ILaunchTileProps> = ({ launch }) => {
   const { colors } = useTheme();
+  const { timezone } = useContext(SettingsContext);
   return (
     <View style={styles.launchTile}>
       <View style={styles.launchTileLeft}>
@@ -20,8 +22,9 @@ const LaunchTile: FC<ILaunchTileProps> = ({ launch }) => {
         </Typography>
         <Spacer y={5} />
         <Typography color="subtext" size={14}>
-          {moment(launch.net).format("LLL")}
+          {moment.utc(launch.net).tz(timezone).format("LLL z")}
         </Typography>
+
         <Spacer y={5} />
         <View style={styles.chipsRow}>
           {launch.mission?.orbit && (

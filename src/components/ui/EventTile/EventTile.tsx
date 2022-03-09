@@ -1,16 +1,18 @@
 import { StyleSheet, View } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { SpaceEvent } from "../../../types/apiResponse";
 import Typography from "../../text/Typography";
 import Spacer from "../../layout/Spacer";
-import moment from "moment";
+import moment from "moment-timezone";
 import EventTileVideoPlayer from "./EventTileVideoPlayer";
+import { SettingsContext } from "../../../context/SettingsContext";
 
 interface IEventTileProps {
   event: SpaceEvent;
 }
 
 const EventTile: FC<IEventTileProps> = ({ event }) => {
+  const { timezone } = useContext(SettingsContext);
   return (
     <View>
       {event.video_url && (
@@ -37,7 +39,7 @@ const EventTile: FC<IEventTileProps> = ({ event }) => {
 
       <View style={styles.row}>
         <Typography color="subtext" size={14}>
-          {moment(event.date).format("LLL")}
+          {moment.utc(event.date).tz(timezone).format("LLL z")}
         </Typography>
         <Typography variant="bold" color="primary" size={14}>
           {event.type.name}

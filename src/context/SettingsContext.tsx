@@ -7,6 +7,7 @@ import {
   NewsSite,
   EventType,
 } from "../types/settings";
+import * as Localization from "expo-localization";
 
 type SettingsContextState = {
   theme: Themes;
@@ -14,6 +15,7 @@ type SettingsContextState = {
   eventType: EventType;
   browser: Browsers;
   newsSite: NewsSite;
+  timezone: string;
   selectTheme: (theme: Themes) => void;
   selectLaunchType: (launchType: LaunchType) => void;
   selectEventType: (eventType: EventType) => void;
@@ -27,6 +29,7 @@ const contextDefaultValue: SettingsContextState = {
   eventType: "upcoming",
   browser: "in app",
   newsSite: "",
+  timezone: Localization.timezone,
   selectTheme: () => {},
   selectLaunchType: () => {},
   selectEventType: () => {},
@@ -49,6 +52,9 @@ export const SettingsContextProvider: FC = ({ children }) => {
     contextDefaultValue.newsSite
   );
   const [browser, setBrowser] = useState<Browsers>(contextDefaultValue.browser);
+  const [timezone, setTimezone] = useState<string>(
+    contextDefaultValue.timezone
+  );
 
   const selectTheme = (theme: Themes) => {
     setTheme(theme);
@@ -215,6 +221,7 @@ export const SettingsContextProvider: FC = ({ children }) => {
         browser,
         newsSite,
         eventType,
+        timezone,
         selectTheme,
         selectLaunchType,
         selectEventType,

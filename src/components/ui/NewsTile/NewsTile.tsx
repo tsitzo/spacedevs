@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import moment from "moment";
+import moment from "moment-timezone";
 
 import { NewsArticle } from "../../../types/apiResponse";
 import { SettingsContext } from "../../../context/SettingsContext";
@@ -21,7 +21,7 @@ interface INewsTileProps {
 }
 
 const NewsTile: FC<INewsTileProps> = ({ article }) => {
-  const { browser } = useContext(SettingsContext);
+  const { browser, timezone } = useContext(SettingsContext);
   const { colors } = useTheme();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,7 +71,7 @@ const NewsTile: FC<INewsTileProps> = ({ article }) => {
 
       <View style={styles.row}>
         <Typography color="subtext" size={14}>
-          {moment(article.publishedAt).format("LLL")}
+          {moment.utc(article.publishedAt).tz(timezone).format("LLL z")}
         </Typography>
         <Typography variant="bold" color="primary" size={14}>
           {article.newsSite}
