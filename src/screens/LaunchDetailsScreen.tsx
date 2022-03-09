@@ -20,6 +20,8 @@ import Spacer from "../components/layout/Spacer";
 import Typography from "../components/text/Typography";
 import InfoLabel from "../components/ui/InfoLabel";
 import moment from "moment-timezone";
+import GenericNavigationTile from "../components/ui/GenericNavigationTile";
+import { PadMapTile } from "../components/ui/LaunchDetailsScreen";
 
 interface ILaunchDetailsScreenProps {
   navigation: NativeStackNavigationProp<AppStackParams, "LaunchDetailsScreen">;
@@ -137,6 +139,32 @@ const LaunchDetailsScreen: FC<ILaunchDetailsScreenProps> = ({
           <Spacer y={10} />
 
           <Typography>{launchResponse.status.description}</Typography>
+
+          <Spacer y={20} />
+
+          <TouchableOpacity onPress={() => {}}>
+            <GenericNavigationTile
+              label="Agency"
+              value={
+                launchResponse.launch_service_provider.name.length > 30
+                  ? launchResponse.launch_service_provider.abbrev
+                  : launchResponse.launch_service_provider.name
+              }
+            />
+          </TouchableOpacity>
+
+          <Spacer y={20} />
+
+          <PadMapTile pad={launchResponse.pad} />
+
+          <Spacer y={20} />
+
+          <TouchableOpacity onPress={() => {}}>
+            <GenericNavigationTile
+              label="Rocket"
+              value={launchResponse.rocket.configuration.full_name}
+            />
+          </TouchableOpacity>
         </ScrollView>
       )}
     </SafeArea>
